@@ -1,6 +1,6 @@
 {
-    "name": "nextcloud/app-tutorial",
-    "description": "Nextcloud App Tutorial",
+    "name": "nextcloud/smartdev",
+    "description": "SmartDev app for nextcloud",
     "type": "project",
     "license": "AGPL",
     "authors": [
