@@ -4,6 +4,8 @@ This is the [smartdev] app for [Nextcloud](https://nextcloud.com/).
 
 Implements basic control over smart devices using tuya or  smart_live accounts.
  
+![Screenshot](https://github.com/reekol/smartdev/blob/master/Screenshot.png?raw=true)
+
 ## Try it 
 To install it change into your Nextcloud's apps directory:
 
