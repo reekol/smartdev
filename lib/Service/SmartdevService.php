@@ -86,11 +86,11 @@ class SmartdevService {
 
 	public function login($userId){
 		$this->profile = [
- 			"userName" 		=> $this->getUserValue('email',		$userId),
- 			"password" 		=> $this->getUserValue('password',	$userId),
- 			"bizType" 		=> $this->getUserValue('type',		$userId),
+ 			"userName"		=> $this->getUserValue('email',		$userId),
+ 			"password"		=> $this->getUserValue('password',	$userId),
+ 			"bizType"		=> $this->getUserValue('type',		$userId),
  			"countryCode"	=> $this->getUserValue('country',	$userId),
- 			"region" 		=> $this->getUserValue('zone',		$userId),
+ 			"region"			=> $this->getUserValue('zone',		$userId),
  		];
 		$this->profile['from'] = 'tuya';
 		$this->uri 	= 'https://px1.tuya'.$this->profile["region"].'.com/homeassistant';
