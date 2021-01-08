@@ -63,6 +63,6 @@ clean-dev:
 	rm -rf node_modules
 
 # Tests
-test:
-	./vendor/phpunit/phpunit/phpunit -c phpunit.xml
-	./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
+#test:
+#	./vendor/phpunit/phpunit/phpunit -c phpunit.xml
+#	./vendor/phpunit/phpunit/phpunit -c phpunit.integration.xml
