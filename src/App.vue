@@ -156,8 +156,10 @@ export default {
 
 		async saveSmartuser(smartuser) {
 			try {
-				const response = await axios.put(generateUrl('/apps/smartdev/user'), smartuser)
+				let response = await axios.put(generateUrl('/apps/smartdev/user'), smartuser)
 				this.smartuser = response.data
+				response = await axios.get(generateUrl('/apps/smartdev/smartdev'))
+				this.smartdev = response.data
 			} catch (e) {
 				console.error(e)
 				showError(t('smartuser', 'Unable to save credentials'))
