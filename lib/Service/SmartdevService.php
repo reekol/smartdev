@@ -14,8 +14,8 @@ class SmartdevService {
 
 	/** @var SmartdevMapper */
 	private $profile = [];
-   private $uri = '';
-   private $tokens = null;
+	private $uri = '';
+	private $tokens = null;
 
 	public function __construct(IConfig $config, $appName) {
 		$this->config = $config;
