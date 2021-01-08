@@ -89,7 +89,7 @@ class SmartdevService {
  			"userName" 		=> $this->getUserValue('email',		$userId),
  			"password" 		=> $this->getUserValue('password',	$userId),
  			"bizType" 		=> $this->getUserValue('type',		$userId),
- 			"countryCode" 	=> $this->getUserValue('country',	$userId),
+ 			"countryCode"	=> $this->getUserValue('country',	$userId),
  			"region" 		=> $this->getUserValue('zone',		$userId),
  		];
 		$this->profile['from'] = 'tuya';
