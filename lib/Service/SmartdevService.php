@@ -16,7 +16,8 @@ class SmartdevService {
 	private $profile = [];
 	private $uri = '';
 	private $tokens = null;
-
+	private static $CACHE_TIME = 600;
+	
 	public function __construct(IConfig $config, $appName) {
 		$this->config = $config;
 		$this->appName = $appName;
@@ -94,7 +95,7 @@ class SmartdevService {
  		];
 		$this->profile['from'] = 'tuya';
 		$this->uri 	= 'https://px1.tuya'.$this->profile["region"].'.com/homeassistant';
-		$response 	= $this->post($this->uri."/auth.do", $this->profile, false, $userId, ['name' => 'loginPost', 'time' => 600 ]);
+		$response 	= $this->post($this->uri."/auth.do", $this->profile, false, $userId, ['name' => 'loginPost', 'time' => $this->CACHE_TIME ]);
 		if(isset($response->access_token)) $this->setUserValue('access_token',$userId,$response->access_token);
 	}
 
@@ -102,7 +103,7 @@ class SmartdevService {
 		return $this->post($this->uri.'/skill', [
 					"header"  => ["name" => 'Discovery',"namespace" => 'discovery',"payloadVersion" => 1],
 					"payload" => ["accessToken" => $this->getUserValue('access_token',$userId)]
-				], true, $userId, ['name' => 'devicestPost', 'time' => 600 ]);
+				], true, $userId, ['name' => 'devicestPost', 'time' => $this->CACHE_TIME ]);
 	}
 
 	public function setState($userId,$id,$state) {
@@ -117,6 +118,6 @@ class SmartdevService {
 		foreach($devicesReq->payload->devices as $k => $device){
 			if($device->id === $id) $devicesReq->payload->devices[$k]->data->state = (bool) $state;
 		}
-		$this->cacheRebuild('devicestPost', $userId, $devicesReq, 600);
+		$this->cacheRebuild('devicestPost', $userId, $devicesReq, $this->CACHE_TIME);
 	}
 }
