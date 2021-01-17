@@ -4,17 +4,18 @@
 			<ul>
 				<AppNavigationItem v-for="smartd in smartdev"
 					:key="smartd.id"
+					:icon="(smartd.data.online?'icon-category-monitoring':'icon-category-disabled')"
 					:title="smartd.name"
 					:class="{active: currentSmartdevId === smartd.id}"
 					@click="openSmartdev(smartd)">
 					<template slot="actions">
 						<ActionButton v-if="smartd.data.state === false"
-							icon="icon-play"
+							icon="icon-view-play"
 							@click="playSmartdev(smartd)">
 							{{ t('smartd', 'Play smartdev') }}
 						</ActionButton>
 						<ActionButton v-else
-							icon="icon-pause"
+							icon="icon-view-pause"
 							@click="pauseSmartdev(smartd)">
 							{{ t('smartd', 'Pause smartdev') }}
 						</ActionButton>
