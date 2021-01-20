@@ -1,37 +1,42 @@
 <?php
-
 namespace OCA\Smartdev\Controller;
 
 use OCA\Smartdev\AppInfo\Application;
-use OCA\Smartdev\Service\SmartdevService;
-use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\DataResponse;
-use OCP\IRequest;
+use OCA\Smartdev\Service\SmartdevService;
+use \OCP\AppFramework\ApiController;
+use \OCP\IRequest;
 
 class SmartdevApiController extends ApiController {
 
 	private $service;
 	private $userId;
 
-	public function __construct(IRequest $request, SmartdevService $service, $userId) {
-		parent::__construct(Application::APP_ID, $request);
+	public function __construct( IRequest $request, SmartdevService $service, $userId) {
+		parent::__construct(
+				Application::APP_ID,
+				$request,
+            'PUT, POST, GET, DELETE, PATCH',
+            'Authorization, Content-Type, Accept',
+            1728000);
 		$this->service = $service;
 		$this->userId = $userId;
+ 		$this->service->login($userId);
 	}
 
-	public function index(): DataResponse {
+	/**
+	* @CORS
+	* @NoCSRFRequired
+	*/
+	public function list(): DataResponse {
 		return new DataResponse($this->service->getDevices($this->userId)->payload->devices);
 	}
 
-	public function userPut($email, $password, $country, $zone, $type): array {
-		return $this->service->setUserCredentials($this->userId, $email, $password, $country, $zone, $type);
-	}
-	
-	public function userGet($email, $password, $country, $zone, $type): array {
-		return $this->service->getUserCredentials($this->userId);
-	}
-
-	public function update(string $id, string $name, $data) {
- 		$this->service->setState($this->userId, $id, (int) $data['state']);
+	/**
+	* @CORS
+	* @NoCSRFRequired
+	*/
+	public function setstate($id, $state) {
+ 		$this->service->setState($this->userId, $id, (int) $state);
 	}
 }
